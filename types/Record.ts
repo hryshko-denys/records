@@ -2,7 +2,7 @@ export interface RecordInt {
     id: string;
     title: string,
     'created_at': Date,
-    value: number,
+    number: number,
     currency: string,
 }
 
