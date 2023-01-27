@@ -39,6 +39,12 @@ import TableHeader from "~/components/table/TableHeader.vue";
 const { email } = useRoute().params;
 const { records } = useRecords();
 
+watchEffect(async () => {
+  if (records.value.length === 0) {
+    await navigateTo("/login");
+  }
+});
+
 const currentRecords = computed(() => {
   return records.value.filter((record) =>
       record.people.includes(email)

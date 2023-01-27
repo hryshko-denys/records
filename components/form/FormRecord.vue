@@ -1,48 +1,12 @@
 <template>
   <form @submit.prevent="submitForm" class="flex flex-col">
-    <label for="title"> Title </label>
-    <input
-      v-model="title.value"
-      @blur="title.isValid = true"
-      id="title"
-      type="text"
-      :class="[
-        'border-2 border-grey-200',
-        !title.isValid && 'border-red-700',
-      ]"
-    />
-    <label for="user-email"> User email </label>
-    <input
-      v-model.trim="email.value"
-      @blur="email.isValid = true"
-      id="user-email"
-      type="email"
-      :class="[
-        'border-2 border-grey-200',
-        !email.isValid && 'border-red-700',
-      ]"
-    />
-    <label for="value"> value </label>
-    <input
-      v-model="number.value"
-      @blur="number.isValid = true"
-      id="value"
-      type="number"
-      :class="[
-        'border-2 border-grey-200',
-        !number.isValid && 'border-red-700',
-      ]"
-    />
-    <label for="currency"> currency </label>
-    <input
-      v-model="currency.value"
-      @blur="currency.isValid = true"
-      id="currency"
-      type="string"
-      :class="[
-        'border-2 border-grey-200',
-        !currency.isValid && 'border-red-700',
-      ]"
+    <form-input
+      v-for="input in recordInfo"
+      :key="input.title"
+      v-model="input.value"
+      :isValid="input.isValid"
+      :title="input.title"
+      @handle-blur="input.isValid = true"
     />
 
     <button type="submit">Submit</button>
@@ -51,6 +15,7 @@
 
 <script setup>
 import useUser from "~/composables/useUser";
+import FormInput from "~/components/form/FormInput.vue";
 
 const { user } = useUser();
 
@@ -77,16 +42,13 @@ const props = defineProps({
     default: "$",
   },
 });
-console.log(props);
 
 const recordInfo = reactive({
-  title: { isValid: true, value: props.title },
-  email: { isValid: true, value: props.email },
-  number: { isValid: true, value: props.number },
-  currency: { isValid: true, value: props.currency },
+  title: { isValid: true, value: props.title, title: "Title" },
+  email: { isValid: true, value: props.email, title: "Email" },
+  number: { isValid: true, value: props.number, title: "Value" },
+  currency: { isValid: true, value: props.currency, title: "Currency" },
 });
-
-const { title, email, number, currency } = toRefs(recordInfo);
 
 const submitForm = () => {
   const gmailRegEx = new RegExp("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)", "ig");
@@ -111,7 +73,10 @@ const submitForm = () => {
   }
 
   if (isValidForm) {
-    emit("submit-form", { record: newRecord, recordWith: recordInfo.email.value });
+    emit("submit-form", {
+      record: newRecord,
+      recordWith: recordInfo.email.value,
+    });
   }
 };
 </script>

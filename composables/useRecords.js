@@ -31,7 +31,7 @@ export default () => {
     }
 
     if (error) {
-      console.log("add new record error");
+      console.log("add new record error", error);
     }
   };
 
