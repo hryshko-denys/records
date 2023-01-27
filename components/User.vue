@@ -1,16 +1,16 @@
 <template>
   <div
     v-if="user"
-    class="w-[250px] flex flex-col items-center justify-center border rounded-[10px] shadow-cyan-500/50 px-[10px] py-[15px]"
+    class="w-[150px] flex flex-col items-center justify-center border rounded-[10px] shadow-cyan-500/50 px-[5px] py-[8px]"
   >
     <h2>{{ name }}</h2>
     <img
       :src="profile"
-      class="rounded-[15px]"
+      class="w-[75px] h-[75px] mb-[5px] rounded-[15px]"
       alt="User"
       @error="setDefaultImg"
     />
-    <span>{{ email }}</span>
+    <div class="text-[12px]">{{ email }}</div>
 
     <button @click="logout">Sign out</button>
   </div>
