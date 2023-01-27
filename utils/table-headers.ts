@@ -1,1 +1,1 @@
-export default ["Number", "Title", "Date", "Value", "Currency"];
+export default ["Number", "Title", "Date", "Value", "Currency", "", ""];

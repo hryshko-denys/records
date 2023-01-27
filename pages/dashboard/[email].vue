@@ -5,7 +5,7 @@
   <div
     class="w-[100%] mb-[15px] rounded-[15px] border-amber-800 border p-[5px] place-content-center"
   >
-    <div class="grid grid-cols-[10%_1fr_1fr_1fr_1fr]">
+    <div class="grid grid-cols-[10%_1fr_1fr_1fr_1fr_40px_40px]">
       <table-header v-for="header in tableHeaders" :key="header">
         {{ header }}
       </table-header>
@@ -15,6 +15,8 @@
       :key="record.id"
       :record="record"
       :number="index"
+      @edit-record="edit"
+      @delete-record="deleteRecord"
     />
   </div>
   <NuxtLink
@@ -39,7 +41,17 @@ import TableHeader from "~/components/table/TableHeader.vue";
 const { email } = useRoute().params;
 const { records } = useRecords();
 
-const currentRecords = records.value.filter((record) =>
-  record.people.includes(email)
-);
+const currentRecords = computed(() => {
+  return records.value.filter((record) =>
+      record.people.includes(email)
+  );
+})
+
+const edit = () => {
+  console.log('edit')
+};
+
+const deleteRecord = () => {
+  console.log('delete')
+}
 </script>

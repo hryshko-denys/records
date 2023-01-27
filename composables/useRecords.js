@@ -44,5 +44,19 @@ export default () => {
     return Array.from(new Set(users)) || [];
   })
 
-  return { getAllRecords, records, addNewRecord, recordsAlreadyLoaded, uniqueUsers };
+  const deleteRecord = async (id) => {
+    const { error } = await client.from('first').delete().eq('id', id)
+
+    if (error) {
+      console.log('delete record error', error)
+    } else {
+      records.value = records.value.filter(record => record.id !== id)
+    }
+  }
+
+  const editRecord = async (id) => {
+
+  }
+
+  return { getAllRecords, records, addNewRecord, recordsAlreadyLoaded, uniqueUsers, deleteRecord };
 };

@@ -7,7 +7,7 @@
       @blur="title.isValid = true"
       id="title"
       type="text"
-      :class="!title.isValid && 'border-red-700 border-2'"
+      :class="[!title.isValid && 'border-red-700 border-2', 'border-2 border-black']"
     />
     <label for="user-email"> User email </label>
     <input
@@ -15,7 +15,7 @@
       @blur="email.isValid = true"
       id="user-email"
       type="email"
-      :class="!email.isValid && 'border-red-700 border-2'"
+      :class="[!email.isValid && 'border-red-700 border-2', 'border-2 border-black']"
     />
     <label for="value"> value </label>
     <input
@@ -23,7 +23,7 @@
       @blur="number.isValid = true"
       id="value"
       type="number"
-      :class="!number.isValid && 'border-red-700 border-2'"
+      :class="[!number.isValid && 'border-red-700 border-2', 'border-2 border-black']"
     />
     <label for="currency"> currency </label>
     <input
@@ -31,11 +31,10 @@
       @blur="currency.isValid = true"
       id="currency"
       type="string"
-      :class="!currency.isValid && 'border-red-700 border-2'"
+      :class="[!currency.isValid && 'border-red-700 border-2', 'border-2 border-black']"
     />
 
     <button type="submit">Submit</button>
-    {{ searchQuery }}
   </form>
 </template>
 
