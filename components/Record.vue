@@ -3,7 +3,7 @@
     <table-cell v-for="cell in tableCells" :key="cell">
       {{ cell }}
     </table-cell>
-    <button @click="emit('edit-record', id)">
+    <button @click="setEditedRecord(props.record)">
       <EditSvg class="w-[20px] h-[20px]" />
     </button>
     <button @click="deleteRecord(id)">
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRecords } from "#imports";
+import { useEditRecord, useRecords } from "#imports";
 
 import TableCell from "~/components/table/TableCell.vue";
 import DeleteSvg from "~/components/icons/DeleteSvg.vue";
@@ -25,6 +25,7 @@ const props = defineProps<{ record: RecordInt; number: number }>();
 const { title, created_at, number, currency, id } = props.record;
 
 const { deleteRecord } = useRecords();
+const { setEditedRecord } = useEditRecord();
 
 const adaptedDate = computed(() => {
   return new Date(created_at).toLocaleString("en-US", {

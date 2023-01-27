@@ -15,8 +15,6 @@
       :key="record.id"
       :record="record"
       :number="index"
-      @edit-record="edit"
-      @delete-record="deleteRecord"
     />
   </div>
   <NuxtLink
@@ -46,12 +44,4 @@ const currentRecords = computed(() => {
       record.people.includes(email)
   );
 })
-
-const edit = () => {
-  console.log('edit')
-};
-
-const deleteRecord = () => {
-  console.log('delete')
-}
 </script>

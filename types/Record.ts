@@ -4,6 +4,7 @@ export interface RecordInt {
     'created_at': Date,
     number: number,
     currency: string,
+    people: string[]
 }
 
 export type ItemInfo = {
