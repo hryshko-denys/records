@@ -8,7 +8,7 @@ export default async () => {
 
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
+        provider: "github",
       });
 
       if (error) {
