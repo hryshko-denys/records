@@ -22,18 +22,20 @@ definePageMeta({
 });
 
 const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = useRecords();
-const { user, auth } = useUser();
-const session = await auth.getSession()
-console.log(session, "session")
+const { user, auth, getSession } = useUser();
 const isLoading = ref(true);
 
 watchEffect(async () => {
+  console.log('watch dashboard', user);
+
   if (!user.value) {
     await navigateTo("/login");
   }
 });
 
 onMounted(async () => {
+  await getSession();
+
   if (recordsAlreadyLoaded.value) {
     isLoading.value = false;
 
