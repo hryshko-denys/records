@@ -8,7 +8,8 @@ definePageMeta({
   middleware: ["auth"],
 });
 
-const { user, login, isLoading } = useUser();
+const { user, login, isLoading, userInfo } = useUser();
+console.log(userInfo.value)
 
 watchEffect(async () => {
   if (user.value) {

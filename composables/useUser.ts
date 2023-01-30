@@ -1,8 +1,13 @@
 const isLoading = ref(false);
+const userInfo: any = ref(null)
 
 export default () => {
   const supabase = useSupabaseClient();
   const user = useSupabaseUser();
+
+  if (user) {
+    userInfo.value = user;
+  }
   console.log(user, "USER")
 
   const login = async () => {
@@ -40,5 +45,5 @@ export default () => {
     navigateTo("/login");
   };
 
-  return { login, logout, user, auth: supabase.auth, isLoading };
+  return { login, logout, user, auth: supabase.auth, isLoading, userInfo };
 };
