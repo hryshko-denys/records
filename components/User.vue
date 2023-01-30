@@ -18,11 +18,7 @@
 
 <script setup>
 const { logout, user } = useUser();
-const config = useRuntimeConfig();
-let url =
-    config.public.productionSite ?? // Set this to your site URL in production env.
-    "http://localhost:3000/";
-console.log(config.public.productionSite, "URL", url);
+console.log(user)
 
 const name = computed(() => user.value?.user_metadata.full_name);
 console.log(user.value?.user_metadata);

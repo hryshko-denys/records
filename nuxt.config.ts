@@ -8,9 +8,4 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css"],
-  runtimeConfig: {
-    public: {
-      productionSite: process.env.NEXT_PUBLIC_SITE_URL,
-    },
-  },
 });
