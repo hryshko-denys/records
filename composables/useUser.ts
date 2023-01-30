@@ -1,3 +1,5 @@
+import getUrl from "~/utils/getUrl";
+
 const isLoading = ref(false);
 
 export default () => {
@@ -10,6 +12,9 @@ export default () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
+        options: {
+          redirectTo: getUrl()
+        }
       });
 
       if (error) {
