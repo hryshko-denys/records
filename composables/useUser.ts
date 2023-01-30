@@ -1,10 +1,9 @@
-import getUrl from "~/utils/getUrl";
-
 const isLoading = ref(false);
 
 export default () => {
   const supabase = useSupabaseClient();
   const user = useSupabaseUser();
+  console.log(user, "USER")
 
   const login = async () => {
     isLoading.value = true;
@@ -12,9 +11,6 @@ export default () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        options: {
-          redirectTo: getUrl()
-        }
       });
 
       if (error) {
