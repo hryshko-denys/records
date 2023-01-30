@@ -3,7 +3,6 @@ const isLoading = ref(false);
 export default async () => {
   const supabase = useSupabaseClient();
   const user = useSupabaseUser();
-  // console.log(user)
   const login = async () => {
     isLoading.value = true;
 
@@ -23,16 +22,12 @@ export default async () => {
 
   const logout = async () => {
     isLoading.value = true;
-    console.log("LOGOUT")
 
     try {
-      const { error } = await supabase.auth.signOut()
-
-      // await $fetch("/api/_supabase/session", {
-      //   method: "POST",
-      //   body: { event: "SIGNED_OUT", session: null },
-      // });
-      console.log(user)
+      await $fetch("/api/_supabase/session", {
+        method: "POST",
+        body: { event: "SIGNED_OUT", session: null },
+      });
 
       user.value = null;
     } catch (e) {

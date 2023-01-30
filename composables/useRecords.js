@@ -36,6 +36,9 @@ export default async () => {
   };
 
   const uniqueUsers = computed(() => {
+    if (!user.value) {
+      return [];
+    }
     const users = records.value.map(
       (deal) => deal.people.filter((person) => person !== user.value.email)[0]
     );
