@@ -3,11 +3,13 @@
 </template>
 
 <script setup>
+import useUser from "~/composables/useUser";
+
 definePageMeta({
   middleware: ['auth']
 })
 
-const { user } = useUser();
+const { user } = await useUser();
 
 watchEffect(async () => {
   if (user.value) {
