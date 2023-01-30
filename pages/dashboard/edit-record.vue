@@ -13,7 +13,7 @@
 import useUser from "~/composables/useUser";
 import useEditRecord from "~/composables/useEditRecord";
 
-const { user } = useUser();
+const { user } = await useUser();
 const { editRecord } = await useRecords();
 
 watchEffect(async () => {

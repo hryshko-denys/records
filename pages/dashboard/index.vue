@@ -24,7 +24,7 @@ definePageMeta({
 });
 
 const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = await useRecords();
-const { auth } = useUser();
+const { auth } = await useUser();
 const { user } = await useUser();
 
 const isLoading = ref(true);
