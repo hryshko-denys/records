@@ -22,8 +22,8 @@ definePageMeta({
 });
 
 const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = useRecords();
-const { user } = useUser();
-
+const { user, userInfo } = useUser();
+console.log(userInfo.value)
 const isLoading = ref(true);
 
 watchEffect(async () => {
