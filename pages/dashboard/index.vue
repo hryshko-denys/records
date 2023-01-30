@@ -27,12 +27,9 @@ const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = await useRecords();
 const { auth } = useUser();
 const { user } = await useUser();
 
-console.log(user, "]]");
 const isLoading = ref(true);
 
 watchEffect(async () => {
-  console.log("watch dashboard", user);
-
   if (!user.value) {
     await navigateTo("/login");
   }
