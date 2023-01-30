@@ -22,8 +22,9 @@ definePageMeta({
 });
 
 const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = useRecords();
-const { user, userInfo } = useUser();
-console.log(userInfo.value)
+const { user, auth } = useUser();
+const session = await auth.getSession()
+console.log(session, "session")
 const isLoading = ref(true);
 
 watchEffect(async () => {
