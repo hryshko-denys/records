@@ -9,12 +9,13 @@ definePageMeta({
   middleware: ["auth"],
 });
 
-const { login, isLoading } = await useUser();
+const { login, isLoading, auth } = await useUser();
 
 const { user } = await useUser();
 
 watchEffect(async () => {
-  console.log('watch login', user);
+  const session = await auth.getSession()
+  console.log('session', session);
 
   if (user.value) {
     await navigateTo("/dashboard");
