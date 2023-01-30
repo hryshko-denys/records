@@ -12,13 +12,20 @@
     />
     <div class="text-[12px]">{{ email }}</div>
 
-    <button @click="logout">Sign out</button>
+    <button @click="handleLogout">Sign out</button>
   </div>
 </template>
 
 <script setup>
-const { logout, user } = useUser();
-console.log(user)
+import useUser from "~/composables/useUser";
+
+const { logout, user } = await useUser();
+const handleLogout = async () => {
+  console.log("***", logout);
+  await logout();
+};
+console.log(user, logout)
+
 
 const name = computed(() => user.value?.user_metadata.full_name);
 console.log(user.value?.user_metadata);
