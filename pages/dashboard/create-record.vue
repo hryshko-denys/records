@@ -6,8 +6,8 @@
 <script setup>
 import useUser from "~/composables/useUser";
 
-const { user } = useUser();
-const { addNewRecord } = useRecords();
+const { user } = await useUser();
+const { addNewRecord } = await useRecords();
 
 const route = useRoute();
 const searchQuery = computed(() => route.query.email || '');

@@ -17,7 +17,7 @@
 import useUser from "~/composables/useUser";
 import FormInput from "~/components/form/FormInput.vue";
 
-const { user } = useUser();
+const { user } = await useUser();
 
 const emit = defineEmits(["submit-form"]);
 const props = defineProps({

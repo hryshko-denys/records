@@ -1,23 +1,9 @@
-import {useSupabaseAuthClient} from "#build/imports";
-
 const isLoading = ref(false);
-const user: any = ref();
 
-export default () => {
+export default async () => {
   const supabase = useSupabaseClient();
-  const authClient = useSupabaseAuthClient()
-
-  const getSession = async () => {
-    const session: any = await supabase.auth.getSession();
-    console.log(session, "SESSION");
-
-    if (session.data.session) {
-      user.value = session.data.session.user;
-    } else {
-      user.value = null;
-    }
-  };
-
+  const user = useSupabaseUser();
+  // console.log(user)
   const login = async () => {
     isLoading.value = true;
 
@@ -37,23 +23,26 @@ export default () => {
 
   const logout = async () => {
     isLoading.value = true;
+    console.log("LOGOUT")
 
     try {
+      const { error } = await supabase.auth.signOut()
+
       // await $fetch("/api/_supabase/session", {
       //   method: "POST",
       //   body: { event: "SIGNED_OUT", session: null },
       // });
-      await authClient.auth.signOut()
+      console.log(user)
 
+      user.value = null;
     } catch (e) {
       console.error(e);
     } finally {
       isLoading.value = false;
     }
-      await getSession()
 
     navigateTo("/login");
   };
 
-  return { login, logout, user, auth: supabase.auth, isLoading, getSession };
+  return { login, logout, auth: supabase.auth, user, isLoading };
 };

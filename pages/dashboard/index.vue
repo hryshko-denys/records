@@ -8,7 +8,9 @@
           <NuxtLink :to="`dashboard/${user}`">{{ user }}</NuxtLink>
         </li>
       </ul>
-      <NuxtLink to="dashboard/create-record">Create deal with new person</NuxtLink>
+      <NuxtLink to="dashboard/create-record"
+        >Create deal with new person</NuxtLink
+      >
     </div>
   </div>
 </template>
@@ -21,12 +23,15 @@ definePageMeta({
   middleware: ["auth"],
 });
 
-const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = useRecords();
-const { user, auth, getSession } = useUser();
+const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = await useRecords();
+const { auth } = useUser();
+const { user } = await useUser();
+
+console.log(user, "]]");
 const isLoading = ref(true);
 
 watchEffect(async () => {
-  console.log('watch dashboard', user);
+  console.log("watch dashboard", user);
 
   if (!user.value) {
     await navigateTo("/login");
@@ -34,8 +39,6 @@ watchEffect(async () => {
 });
 
 onMounted(async () => {
-  await getSession();
-
   if (recordsAlreadyLoaded.value) {
     isLoading.value = false;
 
@@ -47,7 +50,7 @@ onMounted(async () => {
   isLoading.value = false;
 });
 
-const hasRecords = computed(() => uniqueUsers.value.length !== 0)
+const hasRecords = computed(() => uniqueUsers.value.length !== 0);
 
 const title = computed(() => {
   return hasRecords.value

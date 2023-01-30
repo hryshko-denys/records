@@ -4,15 +4,14 @@
 </template>
 
 <script setup>
+import useUser from "~/composables/useUser";
 definePageMeta({
   middleware: ["auth"],
 });
 
-const { user, login, isLoading, getSession } = useUser();
+const { login, isLoading } = await useUser();
 
-onMounted(async () => {
-  await getSession();
-})
+const { user } = await useUser();
 
 watchEffect(async () => {
   console.log('watch login', user);

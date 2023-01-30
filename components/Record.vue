@@ -24,7 +24,7 @@ import { RecordInt } from "~/types/Record";
 const props = defineProps<{ record: RecordInt; number: number }>();
 const { title, created_at, number, currency, id } = props.record;
 
-const { deleteRecord } = useRecords();
+const { deleteRecord } = await useRecords();
 const { setEditedRecord } = useEditRecord();
 
 const adaptedDate = computed(() => {

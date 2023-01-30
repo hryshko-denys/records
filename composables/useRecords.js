@@ -3,9 +3,9 @@ import useEditRecord from "~/composables/useEditRecord";
 const records = ref([]);
 const recordsAlreadyLoaded = ref(false);
 
-export default () => {
+export default async () => {
   const client = useSupabaseClient();
-  const { user } = useUser();
+  const { user } = await useUser();
   const { resetEditedRecord } = useEditRecord();
 
   const getAllRecords = async () => {

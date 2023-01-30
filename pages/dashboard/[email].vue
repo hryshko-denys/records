@@ -37,7 +37,7 @@ import tableHeaders from "~/utils/table-headers";
 import TableHeader from "~/components/table/TableHeader.vue";
 
 const { email } = useRoute().params;
-const { records } = useRecords();
+const { records } = await useRecords();
 
 watchEffect(async () => {
   if (records.value.length === 0) {
