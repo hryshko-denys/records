@@ -17,24 +17,23 @@
       :number="index"
     />
   </div>
-  <NuxtLink
-    :to="`create-record?email=${email}`"
-    class="mb-[20px] inline-block px-[10px] py-[5px] rounded-[5px] bg-[#A8E1BA]"
-  >
+
+  <link-button :link="`create-record?email=${email}`" class="mb-[20px]">
     Create deal with this person
-  </NuxtLink>
-  <NuxtLink
-    to="/dashboard"
-    class="inline-block px-[10px] py-[5px] rounded-[5px] bg-[#A8E1BA]"
-  >
+  </link-button>
+
+  <link-button link="/dashboard" class="mb-[20px]">
     Dashboard
-  </NuxtLink>
+  </link-button>
 </template>
 
 <script setup>
 import useRecords from "~/composables/useRecords";
-import tableHeaders from "~/utils/table-headers";
+
 import TableHeader from "~/components/table/TableHeader.vue";
+import LinkButton from "~/components/LinkButton.vue";
+
+import tableHeaders from "~/utils/table-headers";
 
 const { email } = useRoute().params;
 const { records } = await useRecords();

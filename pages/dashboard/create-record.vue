@@ -10,7 +10,7 @@ const { user } = await useUser();
 const { addNewRecord } = await useRecords();
 
 const route = useRoute();
-const searchQuery = computed(() => route.query.email || '');
+const searchQuery = computed(() => route.query.email || "");
 
 watchEffect(async () => {
   if (!user.value) {

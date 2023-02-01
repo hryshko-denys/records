@@ -25,12 +25,18 @@ watchEffect(async () => {
 const { editedRecord } = useEditRecord();
 
 const { title, people, number, currency } = editedRecord.value;
-const email = computed(() => people.filter((email) => email !== user.value.email)[0])
-
+const email = computed(
+  () => people.filter((email) => email !== user.value.email)[0]
+);
 
 const handleEditRecord = async ({ record, recordWith }) => {
-  const updatedRecord = { ...editedRecord.value, ...record }
+  const updatedRecord = { ...editedRecord.value, ...record };
 
-  await editRecord({ record: updatedRecord, recordWith})
-}
+  try {
+    // todo: is it ok?
+    await editRecord({ record: updatedRecord, recordWith });
+  } catch (error) {
+    console.error(error);
+  }
+};
 </script>
