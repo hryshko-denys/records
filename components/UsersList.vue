@@ -9,5 +9,5 @@
 <script setup>
 import useRecords from "~/composables/useRecords";
 
-const { getAllRecords, uniqueUsers } = await useRecords();
+const { uniqueUsers } = await useRecords();
 </script>

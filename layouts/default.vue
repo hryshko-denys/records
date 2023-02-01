@@ -5,9 +5,11 @@
     <h1 class="mb-[200px] text-3xl font-bold underline">Friendship</h1>
 
     <slot />
+<!--    todo: why client-only-->
     <ClientOnly>
       <User class="absolute top-[10px] right-[10px]" />
     </ClientOnly>
+
     <ErrorMessage
       v-if="errorMessage"
       class="absolute bottom-[10px] right-[10px]"

@@ -4,9 +4,10 @@ const records = ref([]);
 const recordsAlreadyLoaded = ref(false);
 
 export default async () => {
-  const client = useSupabaseClient();
   const { user } = await useUser();
   const { resetEditedRecord } = useEditRecord();
+
+  const client = useSupabaseClient();
 
   const getAllRecords = async () => {
     try {
@@ -19,19 +20,26 @@ export default async () => {
 
       recordsAlreadyLoaded.value = true;
     } catch (error) {
-      console.error("getAllRecords", error);
+      console.error("get All Records error", error);
     }
   };
   const addNewRecord = async ({ record, recordWith }) => {
-    const { data, error } = await client.from("first").upsert(record).select();
+    try {
+      const { data, error } = await client
+        .from("first")
+        .upsert(record)
+        .select();
 
-    if (data) {
-      records.value.push(...data);
-      navigateTo(`/dashboard/${recordWith}`);
-    }
+      if (data) {
+        records.value.push(...data);
+        navigateTo(`/dashboard/${recordWith}`);
+      }
 
-    if (error) {
-      console.log("add new record error", error);
+      if (error) {
+        console.log("add new record error", error);
+      }
+    } catch (error) {
+      console.log('Add new record error', error)
     }
   };
 
@@ -39,6 +47,7 @@ export default async () => {
     if (!user.value) {
       return [];
     }
+
     const users = records.value.map(
       (deal) => deal.people.filter((person) => person !== user.value.email)[0]
     );
@@ -49,6 +58,7 @@ export default async () => {
   const hasRecords = computed(() => uniqueUsers.value.length !== 0);
 
   const deleteRecord = async (id) => {
+    // todo: or handle error like this
     const { error } = await client.from("first").delete().eq("id", id);
 
     if (error) {
@@ -68,6 +78,7 @@ export default async () => {
 
   const editRecord = async ({ record, recordWith }) => {
     const { people, title, number, currency, id } = record;
+
     const { error } = await client
       .from("first")
       .update({ people, title, number, currency })

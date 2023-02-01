@@ -3,6 +3,7 @@ const isLoading = ref(false);
 export default async () => {
   const supabase = useSupabaseClient();
   const user = useSupabaseUser();
+
   const login = async () => {
     isLoading.value = true;
 
@@ -23,6 +24,7 @@ export default async () => {
   const logout = async () => {
     isLoading.value = true;
 
+    // todo: SSR problem
     try {
       await $fetch("/api/_supabase/session", {
         method: "POST",

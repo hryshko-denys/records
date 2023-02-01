@@ -4,6 +4,7 @@
 </template>
 
 <script setup>
+// todo: why I need to import
 import useUser from "~/composables/useUser";
 
 const { user } = await useUser();
