@@ -1,16 +1,13 @@
 <template>
   <div>
     <span v-if="isLoading">loading</span>
+
     <div v-else>
       <h3>{{ title }}</h3>
-      <ul v-if="hasRecords">
-        <li v-for="user in uniqueUsers" :key="user">
-          <NuxtLink :to="`dashboard/${user}`">{{ user }}</NuxtLink>
-        </li>
-      </ul>
-      <NuxtLink to="dashboard/create-record"
-        >Create deal with new person</NuxtLink
-      >
+      <UsersList />
+      <NuxtLink to="dashboard/create-record">
+        Create deal with new person
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -19,13 +16,16 @@
 import useRecords from "~/composables/useRecords";
 import useUser from "~/composables/useUser";
 
+import UsersList from "~/components/UsersList.vue";
+
 definePageMeta({
   middleware: ["auth"],
 });
 
-const { getAllRecords, uniqueUsers, recordsAlreadyLoaded } = await useRecords();
-const { auth } = await useUser();
-const { user } = await useUser();
+const { getAllRecords, uniqueUsers, recordsAlreadyLoaded, hasRecords } =
+  await useRecords();
+
+const { auth, user } = await useUser();
 
 const isLoading = ref(true);
 
@@ -46,8 +46,6 @@ onMounted(async () => {
 
   isLoading.value = false;
 });
-
-const hasRecords = computed(() => uniqueUsers.value.length !== 0);
 
 const title = computed(() => {
   return hasRecords.value

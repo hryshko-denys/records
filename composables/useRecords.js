@@ -46,6 +46,8 @@ export default async () => {
     return Array.from(new Set(users)) || [];
   });
 
+  const hasRecords = computed(() => uniqueUsers.value.length !== 0);
+
   const deleteRecord = async (id) => {
     const { error } = await client.from("first").delete().eq("id", id);
 
@@ -88,5 +90,6 @@ export default async () => {
     uniqueUsers,
     deleteRecord,
     editRecord,
+    hasRecords,
   };
 };
